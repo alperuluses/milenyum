@@ -1,0 +1,351 @@
+/* Reset & Base Variables */
+:root {
+    --color-bg: #0a0a0a;
+    --color-text: #e0e0e0;
+    --color-text-muted: #888888;
+    --color-accent: #8d6e63; /* Warm brown */
+    --color-gold: #c5a059;
+    --color-card-bg: #141414;
+    
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+    user-select: none; /* Prevent text selection cursor */
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.8), transparent);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.7);
+}
+
+.nav-links a:hover {
+    color: var(--color-gold);
+}
+
+.cart-icon {
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 4rem;
+    overflow: hidden;
+}
+
+.hero-image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Mask effect for image blending */
+.hero-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--color-bg) 10%, transparent 60%);
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 1;
+}
+
+.subtitle {
+    display: block;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: #fff;
+}
+
+.hero p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 400px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    transition: all 0.4s ease;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* Collection Section */
+.collection {
+    padding: 6rem 4rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.line {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-accent);
+    margin: 0 auto;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.product-card {
+    background-color: var(--color-card-bg);
+    transition: transform 0.4s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card-image {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at center, #2a2a2a 0%, #141414 70%);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.6s ease;
+    padding: 1rem;
+}
+
+.product-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.price {
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-shop {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: 0.3s;
+}
+
+.product-card:hover .btn-shop {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* About / Footer */
+.about {
+    padding: 6rem 4rem;
+    text-align: center;
+    background-color: #0f0f0f;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.about h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-gold);
+}
+
+.about p {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+footer {
+    padding: 3rem 4rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #444;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-col h4 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.footer-col a {
+    margin-left: 1.5rem;
+}
+
+.footer-col a:hover {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1.5rem 2rem;
+    }
+    .nav-links {
+        display: none; /* Simple hiding for mobile for now */
+    }
+    
+    .hero {
+        padding: 0 2rem;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-image-container {
+        width: 100%;
+        position: absolute;
+        opacity: 0.3;
+        z-index: 0;
+    }
+    
+    .hero-content {
+        margin-top: 0;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .collection, .about, footer {
+        padding: 4rem 2rem;
+    }
+}

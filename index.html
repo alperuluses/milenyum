@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
     
@@ -19,7 +19,12 @@
             <li><a href="#about">Hikayemiz</a></li>
             <li><a href="#contact">İletişim</a></li>
         </ul>
-        <div class="cart-icon">SEPET (0)</div>
+        <div class="hamburger d-md-none">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <div class="cart-icon d-none">SEPET (0)</div>
     </nav>
 
     <!-- Hero Section -->
@@ -90,19 +95,26 @@
         </div>
     </section>
 
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="contact">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3117.712375204696!2d27.068747199999997!3d38.60948989999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd37a113f34d1%3A0x73fdafda08701acd!2zRGVyaSBTYXTEscWfIFRhbWlyYXQgQm95YW1hOiBNxLBMRU5ZVU0gREVSxLA!5e0!3m2!1str!2str!4v1769845583344!5m2!1str!2str" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h4>MİLENYUM DERİ</h4>
-                <p>&copy; 2024 Tüm hakları saklıdır.</p>
+                <p>&copy; 2026 Tüm hakları saklıdır.</p>
             </div>
             <div class="footer-col">
-                <a href="#">Instagram</a>
-                <a href="#">Pinterest</a>
+                <a href="https://www.instagram.com/milenyumderi/">Instagram</a>
             </div>
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+@import url('shared.css');
+
 /* Reset & Base Variables */
 :root {
     --color-bg: #0a0a0a;
@@ -15,6 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -315,12 +318,67 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .navbar {
         padding: 1.5rem 2rem;
+        position: fixed; /* Sticky behavior */
+        background-color: rgba(10, 10, 10, 0.95); /* Slightly transparent dark bg for better readability when scrolling */
+        backdrop-filter: blur(10px); /* Glassmorphism effect */
     }
+    
+    /* Hamburger Style */
+    .hamburger {
+        cursor: pointer;
+        z-index: 20; /* Above overlay */
+    }
+    
+    .hamburger div {
+        width: 25px;
+        height: 2px;
+        background-color: #fff;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    /* Mobile Nav Overlay */
     .nav-links {
-        display: none; /* Simple hiding for mobile for now */
+        display: flex; /* Override d-none if it was set, we control via transform/opacity now */
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        height: 100vh;
+        width: 100%; /* Full screen overlay */
+        background-color: #0a0a0a;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-100%); /* Slide from top */
+        transition: transform 0.5s ease-in-out;
+        z-index: 15;
+    }
+
+    .nav-links.nav-active {
+        transform: translateY(0%);
+    }
+
+    .nav-links li {
+        opacity: 0; /* Fade in links */ 
+        margin: 1.5rem 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.5rem; /* Larger font for mobile */
+    }
+
+    /* Hamburger Animation */
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
     }
     
     .hero {

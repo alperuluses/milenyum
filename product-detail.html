@@ -50,38 +50,42 @@
         <div class="product-wrapper">
             <!-- Gallery -->
             <div class="product-gallery">
-                <div class="main-image">
+                <div class="main-image skeleton" id="mainImgContainer">
                     <img src="" alt="Ürün Yükleniyor" id="mainImg" style="display: none;">
-                    <div id="image-loader" style="color: white;">Yükleniyor...</div>
                 </div>
             </div>
 
             <!-- Info -->
             <div class="product-info">
-                <h1 id="product-name">...</h1>
-                <p class="product-price" id="product-price">...</p>
+                <h1 id="product-name" class="skeleton skeleton-title"></h1>
+                <p class="product-price skeleton skeleton-price" id="product-price"></p>
 
                 <div class="product-description" id="product-description">
-                    <p>...</p>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text" style="width: 80%"></div>
                 </div>
 
                 <div class="size-selector">
                     <span>Beden:</span>
                     <div class="sizes" id="size-container">
                         <!-- Dynamic Sizes -->
+                        <div class="skeleton" style="width: 50px; height: 50px;"></div>
+                        <div class="skeleton" style="width: 50px; height: 50px;"></div>
+                        <div class="skeleton" style="width: 50px; height: 50px;"></div>
                     </div>
                 </div>
 
                 <div class="product-actions">
-                    <a href="#" target="_blank" class="btn-primary btn-full" id="whatsapp-btn">WHATSAPP İLE SİPARİŞ
-                        VER</a>
+                    <a href="#" target="_blank" class="btn-primary btn-full skeleton skeleton-btn"
+                        id="whatsapp-btn"></a>
                 </div>
 
                 <!-- Accordion / Details -->
                 <div class="product-details-list">
                     <div class="detail-item">
                         <h4>Ürün Özellikleri</h4>
-                        <p id="product-features">Yükleniyor...</p>
+                        <p id="product-features" class="skeleton skeleton-text"></p>
                     </div>
                     <div class="detail-item">
                         <h4>Teslimat & İade</h4>
@@ -115,84 +119,7 @@
     </footer>
 
     <script src="script.js"></script>
-    <script type="module">
-        import { db, doc, getDoc } from './firebase-config.js';
-
-        async function loadProductDetails() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-
-            if (!productId) {
-                document.querySelector('.page-container').innerHTML = '<p style="text-align:center; color:white; margin-top: 5rem;">Ürün bulunamadı.</p>';
-                return;
-            }
-
-            try {
-                const docRef = doc(db, "products", productId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const product = docSnap.data();
-
-                    document.title = `${product.name} | Milenyum Deri`;
-
-                    // Update Elements
-                    const mainImg = document.getElementById('mainImg');
-                    mainImg.src = product.image;
-                    mainImg.alt = product.name;
-                    mainImg.onload = () => {
-                        mainImg.style.display = 'block';
-                        document.getElementById('image-loader').style.display = 'none';
-                    };
-
-                    document.getElementById('breadcrumb-title').textContent = product.name;
-                    document.getElementById('product-name').textContent = product.name;
-                    document.getElementById('product-price').textContent = `₺${product.price.toLocaleString('tr-TR')}`;
-                    document.getElementById('product-description').innerHTML = `<p>${product.description}</p>`;
-                    document.getElementById('product-features').textContent = product.features || "%100 Hakiki Deri. El yapımı üretim.";
-
-                    // Sizes and WhatsApp Logic
-                    const sizeContainer = document.getElementById('size-container');
-                    sizeContainer.innerHTML = '';
-                    const sizes = product.sizes || ['S', 'M', 'L', 'XL', 'XXL'];
-
-                    // Default selection (try L, otherwise first available)
-                    let selectedSize = sizes.includes('L') ? 'L' : sizes[0];
-
-                    function updateWhatsappLink() {
-                        const message = `Merhaba, ${product.name} modeli (${selectedSize} Beden) hakkında bilgi almak istiyorum.`;
-                        const whatsappUrl = `https://wa.me/905365561808?text=${encodeURIComponent(message)}`;
-                        document.getElementById('whatsapp-btn').href = whatsappUrl;
-                    }
-
-                    sizes.forEach((size) => {
-                        const btn = document.createElement('button');
-                        btn.className = `size-btn ${size === selectedSize ? 'selected' : ''}`;
-                        btn.textContent = size;
-
-                        btn.addEventListener('click', () => {
-                            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-                            btn.classList.add('selected');
-                            selectedSize = size;
-                            updateWhatsappLink();
-                        });
-                        sizeContainer.appendChild(btn);
-                    });
-
-                    // Initial Link Set
-                    updateWhatsappLink();
-
-                } else {
-                    document.querySelector('.page-container').innerHTML = '<p style="text-align:center; color:white; margin-top: 5rem;">Böyle bir ürün bulunamadı (ID hatalı).</p>';
-                }
-            } catch (error) {
-                console.error("Error getting document:", error);
-                document.querySelector('.page-container').innerHTML = '<p style="text-align:center; color:white; margin-top: 5rem;">Ürün yüklenirken hata oluştu.</p>';
-            }
-        }
-
-        loadProductDetails();
-    </script>
+    <script type="module" src="details.js"></script>
 </body>
 
 </html>

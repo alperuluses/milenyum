@@ -122,8 +122,46 @@
 
     <div class="product-grid" id="product-grid">
       <!-- Products will be loaded dynamically from Firebase -->
-      <div class="loading-spinner" style="text-align: center; grid-column: 1/-1; color: white;">
-        Yükleniyor...
+      <!-- Skeleton Loading State -->
+      <div class="product-card">
+        <div class="card-image skeleton skeleton-card-image"></div>
+        <div class="card-info">
+          <div class="skeleton skeleton-title" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-price" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-btn-sm"></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="card-image skeleton skeleton-card-image"></div>
+        <div class="card-info">
+          <div class="skeleton skeleton-title" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-price" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-btn-sm"></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="card-image skeleton skeleton-card-image"></div>
+        <div class="card-info">
+          <div class="skeleton skeleton-title" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-price" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-btn-sm"></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="card-image skeleton skeleton-card-image"></div>
+        <div class="card-info">
+          <div class="skeleton skeleton-title" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-price" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-btn-sm"></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="card-image skeleton skeleton-card-image"></div>
+        <div class="card-info">
+          <div class="skeleton skeleton-title" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-price" style="margin: 0 auto;"></div>
+          <div class="skeleton skeleton-btn-sm"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -170,46 +208,7 @@
   </footer>
 
   <script src="script.js"></script>
-  <script type="module">
-    import { db, collection, getDocs, addDoc } from './firebase-config.js';
-
-
-    async function loadProducts() {
-      const grid = document.getElementById('product-grid');
-      try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-
-        if (querySnapshot.empty) {
-          grid.innerHTML = '<p style="text-align:center; color:white; width: 100%;">Henüz ürün bulunmuyor.</p>';
-          return;
-        }
-
-        grid.innerHTML = ''; // Clear loading
-
-        querySnapshot.forEach((doc) => {
-          const product = doc.data();
-          const card = `
-                        <a href="product-detail.html?id=${doc.id}" class="product-card" style="display: block;">
-                            <div class="card-image">
-                                <img src="${product.image}" alt="${product.name}">
-                            </div>
-                            <div class="card-info">
-                                <h3>${product.name}</h3>
-                                <p class="price">₺${product.price.toLocaleString('tr-TR')}</p>
-                                <span class="btn-shop">İNCELE</span>
-                            </div>
-                        </a>
-                    `;
-          grid.innerHTML += card;
-        });
-      } catch (error) {
-        console.error("Error loading products:", error);
-        grid.innerHTML = '<p style="text-align:center; color:white; width: 100%;">Ürünler yüklenirken bir hata oluştu.</p>';
-      }
-    }
-
-    loadProducts();
-  </script>
+  <script type="module" src="home.js"></script>
 </body>
 
 </html>
